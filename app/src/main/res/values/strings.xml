@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">CivicLens</string>
+    
+    <!-- Dashboard -->
+    <string name="dashboard_title">CivicLens</string>
+    <string name="total_reports">Total Reports</string>
+    <string name="pending_reports">Pending</string>
+    <string name="resolved_reports">Resolved</string>
+    <string name="recent_reports">Recent Reports</string>
+    
+    <!-- Report Actions -->
+    <string name="create_report">Create Report</string>
+    <string name="create_new_report">Create new report</string>
+    <string name="refresh_reports">Refresh reports</string>
+    
+    <!-- Report Status -->
+    <string name="status_pending">PENDING</string>
+    <string name="status_in_progress">IN PROGRESS</string>
+    <string name="status_resolved">RESOLVED</string>
+    <string name="status_rejected">REJECTED</string>
+    
+    <!-- Common -->
+    <string name="loading">Loading…</string>
+    <string name="error">Error</string>
+    <string name="retry">Retry</string>
+    <string name="no_reports">No reports available</string>
 </resources>
