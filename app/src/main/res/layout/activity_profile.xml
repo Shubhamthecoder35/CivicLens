@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ProfileActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Cover -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:background="#D9D9D9">
+
+                <ImageButton
+                    android:id="@+id/btnSettings"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end|top"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/bg_icon_circle_white"
+                    android:contentDescription="Settings"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_settings"
+                    app:tint="@color/primary_color" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivProfileAvatar"
+                    android:layout_width="92dp"
+                    android:layout_height="92dp"
+                    android:layout_gravity="start|bottom"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginBottom="-46dp"
+                    android:contentDescription="Avatar"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/avatar"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlayAppCircle"
+                    app:strokeColor="@color/white"
+                    app:strokeWidth="4dp" />
+            </FrameLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="22dp"
+                android:paddingEnd="22dp"
+                android:paddingTop="56dp"
+                android:paddingBottom="14dp">
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="John Cena"
+                    android:textColor="@color/text_primary"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@id/btnEditProfile"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvHandle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@johncena"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
+                    app:layout_constraintEnd_toStartOf="@id/btnEditProfile"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvName" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEditProfile"
+                    android:layout_width="140dp"
+                    android:layout_height="44dp"
+                    android:backgroundTint="@color/primary_color"
+                    android:text="Edit Profile"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    app:cornerRadius="22dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvName" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Tabs -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingStart="22dp"
+                android:paddingEnd="22dp">
+
+                <TextView
+                    android:id="@+id/tabPosts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Post (4)"
+                    android:textColor="@color/primary_color"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <TextView
+                    android:id="@+id/tabLikes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Like"
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toEndOf="@id/tabPosts"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginStart="38dp" />
+
+                <TextView
+                    android:id="@+id/tabComments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Comment"
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toEndOf="@id/tabLikes"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginStart="38dp" />
+
+                <TextView
+                    android:id="@+id/tabShares"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Share"
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <View
+                    android:id="@+id/tabIndicator"
+                    android:layout_width="52dp"
+                    android:layout_height="2dp"
+                    android:background="@color/primary_color"
+                    app:layout_constraintStart_toStartOf="@id/tabPosts"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#12000000" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerProfileFeed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:clipToPadding="false"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                tools:listitem="@layout/item_post" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_bottom_nav" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

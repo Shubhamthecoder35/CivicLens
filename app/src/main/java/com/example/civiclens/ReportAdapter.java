@@ -1,6 +1,7 @@
 package com.example.civiclens;
 
-import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -74,21 +76,26 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
             int statusColor;
             switch (report.getStatus()) {
                 case "PENDING":
-                    statusColor = Color.parseColor("#FF9800");
+                    statusColor = ContextCompat.getColor(itemView.getContext(), R.color.status_pending);
                     break;
                 case "IN PROGRESS":
-                    statusColor = Color.parseColor("#2196F3");
+                    statusColor = ContextCompat.getColor(itemView.getContext(), R.color.status_in_progress);
                     break;
                 case "RESOLVED":
-                    statusColor = Color.parseColor("#4CAF50");
+                    statusColor = ContextCompat.getColor(itemView.getContext(), R.color.status_resolved);
                     break;
                 case "REJECTED":
-                    statusColor = Color.parseColor("#F44336");
+                    statusColor = ContextCompat.getColor(itemView.getContext(), R.color.status_rejected);
                     break;
                 default:
-                    statusColor = Color.parseColor("#757575");
+                    statusColor = ContextCompat.getColor(itemView.getContext(), R.color.text_secondary);
             }
-            tvReportStatus.setBackgroundColor(statusColor);
+            Drawable bg = tvReportStatus.getBackground();
+            if (bg instanceof GradientDrawable) {
+                ((GradientDrawable) bg.mutate()).setColor(statusColor);
+            } else {
+                tvReportStatus.setBackgroundColor(statusColor);
+            }
 
             // Set sync status visibility
             ivSyncStatus.setVisibility(report.isSynced() ? View.VISIBLE : View.GONE);

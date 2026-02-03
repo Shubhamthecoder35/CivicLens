@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:paddingTop="14dp"
+    android:paddingBottom="14dp">
+
+    <FrameLayout
+        android:id="@+id/iconContainer"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/bg_icon_circle_outline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivCategoryIcon"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:contentDescription="Category icon"
+            app:tint="@color/primary_color"
+            tools:src="@drawable/ic_category_road" />
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/ivChevron"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:contentDescription="Open"
+        android:src="@drawable/ic_chevron_right"
+        app:layout_constraintBottom_toBottomOf="@id/iconContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iconContainer"
+        app:tint="@color/icon_muted" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/text_primary"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/ivChevron"
+        app:layout_constraintStart_toEndOf="@id/iconContainer"
+        app:layout_constraintTop_toTopOf="@id/iconContainer"
+        tools:text="Large pothole near Mexico Square" />
+
+    <LinearLayout
+        android:id="@+id/subtitleRow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toStartOf="@id/ivChevron"
+        app:layout_constraintStart_toEndOf="@id/iconContainer"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle">
+
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            tools:text="Roads" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="6dp"
+            android:text="•"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/status_in_progress"
+            android:textSize="12sp"
+            tools:text="In Progress" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="6dp"
+            android:text="•"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
+            tools:text="2 Mar" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subtitleRow" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

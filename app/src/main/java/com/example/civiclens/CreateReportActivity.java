@@ -25,21 +25,13 @@ public class CreateReportActivity extends AppCompatActivity {
         binding = ActivityCreateReportBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setupToolbar();
-        setupCategoryDropdown();
+        BottomNavHelper.setup(this, binding.bottomNav, R.id.nav_report);
+        setupDropdowns();
         setupClickListeners();
     }
 
-    private void setupToolbar() {
-        setSupportActionBar(binding.toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-        binding.toolbar.setNavigationOnClickListener(v -> finish());
-    }
-
-    private void setupCategoryDropdown() {
-        // Categories for civic issues
+    private void setupDropdowns() {
+        // Categories for civic issues (Figma dropdown)
         String[] categories = new String[]{
                 "Road Infrastructure",
                 "Waste Management",
@@ -56,31 +48,35 @@ public class CreateReportActivity extends AppCompatActivity {
                 categories
         );
         binding.actvCategory.setAdapter(adapter);
+        binding.actvCategory.setOnClickListener(v -> binding.actvCategory.showDropDown());
+
+        String[] locations = new String[]{
+                "Current Location",
+                "Home",
+                "Work",
+                "Other"
+        };
+        ArrayAdapter<String> locationAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_dropdown_item_1line,
+                locations
+        );
+        binding.actvLocation.setAdapter(locationAdapter);
+        binding.actvLocation.setOnClickListener(v -> binding.actvLocation.showDropDown());
     }
 
     private void setupClickListeners() {
-        // Camera/Photo capture button
-        binding.fabCapturePhoto.setOnClickListener(v -> {
-            // TODO: Implement CameraX integration (Experiment 8)
-            Toast.makeText(this, "Camera will be implemented in Experiment 8", Toast.LENGTH_SHORT).show();
-        });
+        binding.btnHelp.setOnClickListener(v ->
+                Toast.makeText(this, "Help (coming soon)", Toast.LENGTH_SHORT).show()
+        );
 
-        // Refresh location button
-        binding.btnRefreshLocation.setOnClickListener(v -> {
-            // TODO: Fetch GPS coordinates (Experiment 7)
-            Toast.makeText(this, "GPS will be implemented in Experiment 7", Toast.LENGTH_SHORT).show();
-        });
+        binding.cardAddPhoto.setOnClickListener(v ->
+                Toast.makeText(this, "Add Photo (coming soon)", Toast.LENGTH_SHORT).show()
+        );
 
-        // Save draft button
-        binding.btnSaveDraft.setOnClickListener(v -> {
-            // TODO: Save to Room Database (Experiment 10)
-            Toast.makeText(this, "Save draft will be implemented in Experiment 10", Toast.LENGTH_SHORT).show();
-        });
-
-        // Submit report button
-        binding.btnSubmitReport.setOnClickListener(v -> {
-            // TODO: Validate and save to database
-            Toast.makeText(this, "Submit will be implemented in Experiment 10", Toast.LENGTH_SHORT).show();
+        binding.btnSubmit.setOnClickListener(v -> {
+            // TODO: Validate and submit (Experiment 10/11)
+            Toast.makeText(this, "Submitted (UI demo)", Toast.LENGTH_SHORT).show();
         });
     }
 

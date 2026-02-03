@@ -1,297 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ReportDetailsActivity">
 
-    <!-- App Bar with Collapsing Toolbar -->
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="300dp">
+    <!-- Top bar -->
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Back"
+        android:padding="8dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/text_primary" />
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsingToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:contentScrim="@color/primary"
-            app:expandedTitleMarginBottom="16dp"
-            app:expandedTitleMarginStart="16dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+    <TextView
+        android:id="@+id/tvTopTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/btnShare"
+        app:layout_constraintStart_toEndOf="@id/btnBack"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Large pothole near Mexico Square" />
 
-            <!-- Report Image -->
-            <ImageView
-                android:id="@+id/ivReportImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/background"
-                android:contentDescription="Report Image"
-                android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax" />
+    <ImageButton
+        android:id="@+id/btnShare"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="14dp"
+        android:background="@drawable/bg_icon_circle_white"
+        android:contentDescription="Share"
+        android:padding="8dp"
+        android:src="@drawable/ic_share"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/primary_color" />
 
-            <!-- Toolbar -->
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:navigationIcon="@android:drawable/ic_menu_revert"
-                app:title="Report Details"
-                app:titleTextColor="@android:color/white" />
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <!-- Scrollable Content -->
+    <!-- Content -->
     <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:id="@+id/scroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@id/actions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTopTitle">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp">
 
-            <!-- Status Badge -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/status_pending"
-                app:cardCornerRadius="8dp"
+                android:layout_height="220dp"
+                app:cardCornerRadius="14dp"
                 app:cardElevation="0dp">
 
-                <LinearLayout
+                <ImageView
+                    android:id="@+id/ivPhoto"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="12dp">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:contentDescription="Status"
-                        android:src="@android:drawable/ic_dialog_info"
-                        android:tint="@android:color/white" />
-
-                    <TextView
-                        android:id="@+id/tvStatus"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        android:text="Pending Review"
-                        android:textColor="@android:color/white"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvReportId"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="#12345"
-                        android:textColor="@android:color/white"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:contentDescription="Issue photo"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/pothole_on_street" />
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Title -->
             <TextView
-                android:id="@+id/tvReportTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Large Pothole on Main Street"
-                android:textColor="@color/text_primary"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <!-- Category -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:contentDescription="Category"
-                    android:src="@android:drawable/ic_menu_view"
-                    android:tint="@color/text_secondary" />
-
-                <TextView
-                    android:id="@+id/tvCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="Road Infrastructure"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <!-- Location -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:contentDescription="Location"
-                    android:src="@android:drawable/ic_dialog_map"
-                    android:tint="@color/text_secondary" />
-
-                <TextView
-                    android:id="@+id/tvLocation"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:text="28.6139° N, 77.2090° E"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnViewOnMap"
-                    style="@style/Widget.Material3.Button.TextButton.Icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View"
-                    android:textSize="12sp"
-                    app:icon="@android:drawable/ic_dialog_map" />
-            </LinearLayout>
-
-            <!-- Timestamp -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:contentDescription="Time"
-                    android:src="@android:drawable/ic_menu_recent_history"
-                    android:tint="@color/text_secondary" />
-
-                <TextView
-                    android:id="@+id/tvTimestamp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="Reported 2 hours ago"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <!-- Divider -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:background="@color/divider" />
-
-            <!-- Description Section -->
-            <TextView
+                android:id="@+id/tvCategoryPill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Description"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_tag_pill"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
+                android:textColor="@color/primary_color"
+                android:textSize="12sp"
+                tools:text="Roads" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/text_primary"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Large pothole near Mexico Square" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvDatetime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/primary_color"
+                    android:textSize="12sp"
+                    tools:text="2 Mar 2025, 10:15 AM" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:text="•"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/status_in_progress"
+                    android:textSize="12sp"
+                    tools:text="In Progress" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:lineSpacingExtra="4dp"
-                android:text="A large pothole has appeared on the main road causing traffic congestion and potential vehicle damage. Immediate attention required."
+                android:layout_marginTop="10dp"
+                android:lineSpacingExtra="2dp"
                 android:textColor="@color/text_secondary"
-                android:textSize="14sp" />
+                android:textSize="13sp"
+                tools:text="There’s a deep pothole on the right lane near Mexico Square that’s causing heavy traffic and posing a safety risk for drivers and cyclists." />
 
-            <!-- Sync Status -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardSyncStatus"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:cardBackgroundColor="@color/background"
-                app:cardCornerRadius="8dp"
+                android:layout_marginTop="18dp"
+                android:text="Updates"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvUpdate1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                tools:text="3 Mar 2025 — Assigned to Road Maintenance Department" />
+
+            <TextView
+                android:id="@+id/tvUpdate2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                tools:text="3 Mar 2025 — Repair team dispatched to location" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/mapCard"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="14dp"
                 app:cardElevation="0dp">
 
-                <LinearLayout
+                <ImageView
+                    android:id="@+id/ivMapPreview"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="12dp">
-
-                    <ImageView
-                        android:id="@+id/ivSyncIcon"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:contentDescription="Sync Status"
-                        android:src="@android:drawable/ic_popup_sync"
-                        android:tint="@color/status_in_progress" />
-
-                    <TextView
-                        android:id="@+id/tvSyncStatus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="Synced with server"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:contentDescription="Map preview"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/map_image" />
             </com.google.android.material.card.MaterialCardView>
-
-            <!-- Action Buttons -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="16dp"
-                android:orientation="horizontal">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnEditReport"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
-                    android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:text="Edit"
-                    app:icon="@android:drawable/ic_menu_edit" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnDeleteReport"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
-                    android:layout_width="0dp"
-                    android:layout_height="56dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:text="Delete"
-                    android:textColor="@color/status_rejected"
-                    app:icon="@android:drawable/ic_menu_delete"
-                    app:iconTint="@color/status_rejected"
-                    app:strokeColor="@color/status_rejected" />
-            </LinearLayout>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <!-- Bottom actions -->
+    <LinearLayout
+        android:id="@+id/actions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEdit"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:backgroundTint="@color/primary_color"
+            android:text="Edit"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:cornerRadius="28dp"
+            app:icon="@drawable/ic_edit"
+            app:iconTint="@color/white"
+            app:iconGravity="textStart" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDelete"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/status_pending"
+            android:text="Delete"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:cornerRadius="28dp"
+            app:icon="@drawable/ic_delete"
+            app:iconTint="@color/white"
+            app:iconGravity="textStart" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

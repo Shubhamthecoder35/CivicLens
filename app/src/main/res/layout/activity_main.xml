@@ -5,165 +5,199 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
-    <!-- App Bar with ConstraintLayout -->
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="CivicLens"
-        app:titleTextColor="@android:color/white" />
-
-    <!-- Statistics Card using ConstraintLayout -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/statsCard"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.56" />
 
-        <!-- LinearLayout inside Card for stats -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp"
-            android:weightSum="3">
-
-            <!-- Total Reports -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tvTotalReports"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textColor="?attr/colorPrimary"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Total Reports"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <!-- Pending Reports -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tvPendingReports"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textColor="#FF9800"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pending"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <!-- Resolved Reports -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tvResolvedReports"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textColor="#4CAF50"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Resolved"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <!-- Section Header -->
-    <TextView
-        android:id="@+id/tvReportsHeader"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Recent Reports"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/statsCard" />
-
-    <!-- RecyclerView for Reports List with SwipeRefreshLayout -->
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayout"
+    <!-- Map area -->
+    <FrameLayout
+        android:id="@+id/mapArea"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@id/btnCreateReport"
+        app:layout_constraintBottom_toTopOf="@id/homeSheet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvReportsHeader">
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivMapBg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="Map"
+            android:scaleType="centerCrop"
+            android:src="@drawable/map_image" />
+
+        <!-- Search bar -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_search_bar">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="start|center_vertical"
+                android:contentDescription="Search"
+                android:src="@drawable/ic_search"
+                app:tint="@color/primary_color" />
+
+            <TextView
+                android:id="@+id/tvSearchHint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:text="Search location or issue..."
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp" />
+        </FrameLayout>
+
+        <!-- Category chips -->
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginTop="64dp"
+            app:chipSpacingHorizontal="10dp"
+            app:singleLine="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipRoads"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:text="Roads"
+                app:chipBackgroundColor="@color/white"
+                app:chipIcon="@drawable/ic_category_road"
+                app:chipIconTint="@color/primary_color"
+                app:chipStrokeColor="@color/divider"
+                app:chipStrokeWidth="1dp"
+                android:textColor="@color/text_secondary" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipLighting"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:text="Lighting"
+                app:chipBackgroundColor="@color/white"
+                app:chipIcon="@drawable/ic_category_light"
+                app:chipIconTint="@color/icon_muted"
+                app:chipStrokeColor="@color/divider"
+                app:chipStrokeWidth="1dp"
+                android:textColor="@color/text_secondary" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipWaste"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:text="Waste"
+                app:chipBackgroundColor="@color/white"
+                app:chipIcon="@drawable/ic_category_waste"
+                app:chipIconTint="@color/icon_muted"
+                app:chipStrokeColor="@color/divider"
+                app:chipStrokeWidth="1dp"
+                android:textColor="@color/text_secondary" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipTransport"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:text="Transport"
+                app:chipBackgroundColor="@color/white"
+                app:chipIcon="@drawable/ic_category_bus"
+                app:chipIconTint="@color/icon_muted"
+                app:chipStrokeColor="@color/divider"
+                app:chipStrokeWidth="1dp"
+                android:textColor="@color/text_secondary" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <!-- Radius overlay -->
+        <View
+            android:layout_width="210dp"
+            android:layout_height="210dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_map_radius_fill" />
+
+        <View
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_map_radius_ring" />
+
+        <!-- Current position -->
+        <View
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_dot_blue" />
+
+        <!-- Some red markers -->
+        <View
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="-110dp"
+            android:layout_marginStart="90dp"
+            android:background="@drawable/bg_dot_red" />
+
+        <View
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="-40dp"
+            android:layout_marginStart="-120dp"
+            android:background="@drawable/bg_dot_red" />
+
+        <View
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="80dp"
+            android:layout_marginStart="120dp"
+            android:background="@drawable/bg_dot_red" />
+
+    </FrameLayout>
+
+    <!-- Feed sheet -->
+    <LinearLayout
+        android:id="@+id/homeSheet"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_home_sheet"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewReports"
+            android:id="@+id/recyclerFeed"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:padding="8dp"
-            tools:listitem="@layout/item_report" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            tools:listitem="@layout/item_post" />
+    </LinearLayout>
 
-    <!-- Floating Action Button for Create Report -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnCreateReport"
-        android:layout_width="wrap_content"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:contentDescription="Create new report"
-        android:src="@android:drawable/ic_input_add"
+        android:background="@color/white"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@android:color/white" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_bottom_nav" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

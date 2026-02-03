@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MyReportsActivity">
+
+    <TextView
+        android:id="@+id/tvHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="18dp"
+        android:text="My Report"
+        android:textColor="@color/text_primary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnFilter"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_circle_mint"
+        android:contentDescription="Filter"
+        android:padding="8dp"
+        android:src="@drawable/ic_filter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/primary_color" />
+
+    <LinearLayout
+        android:id="@+id/filtersRow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvHeader">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_filter_pill">
+
+            <AutoCompleteTextView
+                android:id="@+id/actvFilterCategory"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:hint="Category"
+                android:inputType="none"
+                android:paddingStart="14dp"
+                android:paddingEnd="38dp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/primary_color"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="12dp"
+                android:contentDescription="Dropdown"
+                android:src="@drawable/ic_chevron_down"
+                app:tint="@color/primary_color" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_filter_pill">
+
+            <AutoCompleteTextView
+                android:id="@+id/actvFilterStatus"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:hint="Status"
+                android:inputType="none"
+                android:paddingStart="14dp"
+                android:paddingEnd="38dp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/primary_color"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="12dp"
+                android:contentDescription="Dropdown"
+                android:src="@drawable/ic_chevron_down"
+                app:tint="@color/primary_color" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_filter_pill">
+
+            <AutoCompleteTextView
+                android:id="@+id/actvFilterDate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:hint="Date"
+                android:inputType="none"
+                android:paddingStart="14dp"
+                android:paddingEnd="38dp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/primary_color"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="12dp"
+                android:contentDescription="Dropdown"
+                android:src="@drawable/ic_chevron_down"
+                app:tint="@color/primary_color" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerMyReports"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/filtersRow"
+        tools:listitem="@layout/item_my_report" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_bottom_nav" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

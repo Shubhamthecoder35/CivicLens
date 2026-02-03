@@ -16,52 +16,50 @@ public class ReportDetailsActivity extends AppCompatActivity {
 
     private ActivityReportDetailsBinding binding;
 
+    public static final String EXTRA_TITLE = "EXTRA_TITLE";
+    public static final String EXTRA_CATEGORY = "EXTRA_CATEGORY";
+    public static final String EXTRA_STATUS = "EXTRA_STATUS";
+    public static final String EXTRA_DATE = "EXTRA_DATE";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityReportDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setupToolbar();
-        loadReportDetails();
         setupClickListeners();
-    }
-
-    private void setupToolbar() {
-        setSupportActionBar(binding.toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-        binding.toolbar.setNavigationOnClickListener(v -> finish());
-    }
-
-    private void loadReportDetails() {
-        // TODO: Load report details from database (Experiment 10)
-        // For now, showing placeholder data from layout
-
-        // Example: Get report ID from intent
-        // int reportId = getIntent().getIntExtra("REPORT_ID", -1);
-        // Load data based on reportId
+        bindFromIntent();
     }
 
     private void setupClickListeners() {
-        // View on map button
-        binding.btnViewOnMap.setOnClickListener(v -> {
-            // TODO: Open map fragment with this location (Experiment 3 & 7)
-            Toast.makeText(this, "Map view will be implemented in Experiment 3 & 7", Toast.LENGTH_SHORT).show();
-        });
+        binding.btnBack.setOnClickListener(v -> finish());
+        binding.btnShare.setOnClickListener(v -> Toast.makeText(this, "Share (coming soon)", Toast.LENGTH_SHORT).show());
+        binding.btnEdit.setOnClickListener(v -> Toast.makeText(this, "Edit (coming soon)", Toast.LENGTH_SHORT).show());
+        binding.btnDelete.setOnClickListener(v -> Toast.makeText(this, "Delete (coming soon)", Toast.LENGTH_SHORT).show());
+        binding.mapCard.setOnClickListener(v -> Toast.makeText(this, "Map (coming soon)", Toast.LENGTH_SHORT).show());
+    }
 
-        // Edit report button
-        binding.btnEditReport.setOnClickListener(v -> {
-            // TODO: Navigate to edit screen (Experiment 3)
-            Toast.makeText(this, "Edit functionality will be implemented later", Toast.LENGTH_SHORT).show();
-        });
+    private void bindFromIntent() {
+        String title = getIntent().getStringExtra(EXTRA_TITLE);
+        String category = getIntent().getStringExtra(EXTRA_CATEGORY);
+        String status = getIntent().getStringExtra(EXTRA_STATUS);
+        String date = getIntent().getStringExtra(EXTRA_DATE);
 
-        // Delete report button
-        binding.btnDeleteReport.setOnClickListener(v -> {
-            // TODO: Show confirmation dialog and delete from database
-            Toast.makeText(this, "Delete functionality will be implemented later", Toast.LENGTH_SHORT).show();
-        });
+        if (title == null) title = "Large pothole near Mexico Square";
+        if (category == null) category = "Roads";
+        if (status == null) status = "In Progress";
+        if (date == null) date = "2 Mar 2025, 10:15 AM";
+
+        binding.tvTopTitle.setText(title);
+        binding.tvTitle.setText(title);
+        binding.tvCategoryPill.setText(category);
+        binding.tvStatus.setText(status);
+        binding.tvDatetime.setText(date);
+
+        // Static sample content to match the Figma screen
+        binding.tvDescription.setText("There’s a deep pothole on the right lane near Mexico Square that’s causing heavy traffic and posing a safety risk for drivers and cyclists.");
+        binding.tvUpdate1.setText("3 Mar 2025 — Assigned to Road Maintenance Department");
+        binding.tvUpdate2.setText("3 Mar 2025 — Repair team dispatched to location");
     }
 
     @Override
