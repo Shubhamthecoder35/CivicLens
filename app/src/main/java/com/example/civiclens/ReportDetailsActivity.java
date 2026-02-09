@@ -1,5 +1,6 @@
 package com.example.civiclens;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -36,7 +37,12 @@ public class ReportDetailsActivity extends AppCompatActivity {
         binding.btnShare.setOnClickListener(v -> Toast.makeText(this, "Share (coming soon)", Toast.LENGTH_SHORT).show());
         binding.btnEdit.setOnClickListener(v -> Toast.makeText(this, "Edit (coming soon)", Toast.LENGTH_SHORT).show());
         binding.btnDelete.setOnClickListener(v -> Toast.makeText(this, "Delete (coming soon)", Toast.LENGTH_SHORT).show());
-        binding.mapCard.setOnClickListener(v -> Toast.makeText(this, "Map (coming soon)", Toast.LENGTH_SHORT).show());
+        
+        // Map card click - launches MapActivity (Experiment 3: Intent navigation)
+        binding.mapCard.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MapActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void bindFromIntent() {

@@ -53,6 +53,11 @@
             android:name=".NotificationsActivity"
             android:exported="false" />
         
+        <!-- Map Activity - Fragment Host (Experiment 3) -->
+        <activity
+            android:name=".MapActivity"
+            android:exported="false" />
+        
     </application>
 
 </manifest>

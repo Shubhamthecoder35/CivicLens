@@ -87,7 +87,7 @@ These are the tangible items you will produce for the project:
 
 1. ✅ Install and configure Android Studio or Xcode, and create your first "Hello, World!" application.
 2. ✅ Design a responsive user interface using LinearLayout, ConstraintLayout (Android), or Storyboards (iOS).
-3. Create an app with multiple screens using Intents and Fragments.
+3. ✅ Create an app with multiple screens using Intents and Fragments.
 4. Build an app with buttons and gesture handling for event-driven interactions.
 5. Save user data locally using SharedPreferences (Android) or Core Data (iOS).
 6. Create an app to fetch and display data from a REST API.

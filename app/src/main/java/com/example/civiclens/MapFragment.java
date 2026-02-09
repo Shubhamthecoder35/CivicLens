@@ -13,14 +13,25 @@ import androidx.fragment.app.Fragment;
 import com.example.civiclens.databinding.FragmentMapBinding;
 
 /**
- * MapFragment - Interactive Map Display
- * Part of Experiment 2: UI Design
- * Part of Experiment 3: Fragments (navigation)
- * Part of Experiment 7: GPS & Location (future)
+ * MapFragment - Interactive Map Display Fragment
+ * Part of Experiment 3: Multiple Screens with Intents and Fragments
+ * Demonstrates Fragment lifecycle and communication with host Activity
  */
 public class MapFragment extends Fragment {
 
     private FragmentMapBinding binding;
+    private MapFragmentListener listener;
+
+    /**
+     * Interface for communicating with the host Activity
+     */
+    public interface MapFragmentListener {
+        void onLocationSelected(double latitude, double longitude);
+    }
+
+    public static MapFragment newInstance() {
+        return new MapFragment();
+    }
 
     @Nullable
     @Override
@@ -33,23 +44,47 @@ public class MapFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupClickListeners();
+        updateLocationDisplay();
     }
 
     private void setupClickListeners() {
-        // Filter button
-        binding.btnFilter.setOnClickListener(v -> {
-            // TODO: Show filter dialog (Experiment 4)
-            Toast.makeText(getContext(), "Filter dialog will be implemented in Experiment 4", Toast.LENGTH_SHORT).show();
+        // Zoom controls
+        binding.btnZoomIn.setOnClickListener(v -> {
+            Toast.makeText(getContext(), "Zoom In (Map integration in Experiment 7)", Toast.LENGTH_SHORT).show();
         });
 
-        // My Location button
-        binding.btnMyLocation.setOnClickListener(v -> {
-            // TODO: Center map on user's current location (Experiment 7)
-            Toast.makeText(getContext(), "Location tracking will be implemented in Experiment 7", Toast.LENGTH_SHORT).show();
+        binding.btnZoomOut.setOnClickListener(v -> {
+            Toast.makeText(getContext(), "Zoom Out (Map integration in Experiment 7)", Toast.LENGTH_SHORT).show();
         });
 
-        // Search functionality
-        // TODO: Implement search/autocomplete (Experiment 4)
+        // Recenter button
+        binding.btnRecenter.setOnClickListener(v -> {
+            Toast.makeText(getContext(), "Recentering to current location", Toast.LENGTH_SHORT).show();
+            updateLocationDisplay();
+        });
+
+        // Select location button
+        binding.btnSelectLocation.setOnClickListener(v -> {
+            // Communicate with Activity through interface
+            if (listener != null) {
+                listener.onLocationSelected(40.7128, -74.0060);
+            }
+            Toast.makeText(getContext(), "Location selected!", Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    private void updateLocationDisplay() {
+        // Simulated location data (will be replaced with real GPS in Experiment 7)
+        binding.tvLocationAddress.setText("Mexico Square, City Center");
+        binding.tvCoordinates.setText("Lat: 40.7128, Lng: -74.0060");
+    }
+
+    /**
+     * Set listener for fragment-to-activity communication
+     * Called by the host Activity
+     */
+    public void setListener(MapFragmentListener listener) {
+        this.listener = listener;
     }
 
     @Override

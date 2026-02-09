@@ -1,5 +1,6 @@
 package com.example.civiclens;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
         binding.tvSearchHint.setOnClickListener(v ->
                 android.widget.Toast.makeText(this, "Search (UI demo)", android.widget.Toast.LENGTH_SHORT).show()
         );
+
+        // Map area click - launches MapActivity (Experiment 3: Intent navigation)
+        binding.mapArea.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MapActivity.class);
+            startActivity(intent);
+        });
     }
 
     private List<PostItem> createDummyPosts() {
