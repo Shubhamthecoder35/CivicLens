@@ -67,16 +67,19 @@ public class CreateReportActivity extends AppCompatActivity {
 
     private void setupClickListeners() {
         binding.btnHelp.setOnClickListener(v ->
-                Toast.makeText(this, "Help (coming soon)", Toast.LENGTH_SHORT).show()
-        );
+                Toast.makeText(this, "Help (coming soon)", Toast.LENGTH_SHORT).show());
 
         binding.cardAddPhoto.setOnClickListener(v ->
-                Toast.makeText(this, "Add Photo (coming soon)", Toast.LENGTH_SHORT).show()
-        );
+                Toast.makeText(this, "Add Photo (camera/gallery coming in Exp 8)", Toast.LENGTH_SHORT).show());
 
         binding.btnSubmit.setOnClickListener(v -> {
-            // TODO: Validate and submit (Experiment 10/11)
-            Toast.makeText(this, "Submitted (UI demo)", Toast.LENGTH_SHORT).show();
+            String title = binding.etTitle.getText() != null ? binding.etTitle.getText().toString().trim() : "";
+            if (title.isEmpty()) {
+                Toast.makeText(this, "Please enter a title", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Toast.makeText(this, "Report submitted", Toast.LENGTH_SHORT).show();
+            finish();
         });
     }
 

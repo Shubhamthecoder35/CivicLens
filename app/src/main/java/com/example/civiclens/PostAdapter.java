@@ -13,11 +13,23 @@ import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
 
+/** Exp 4: Button handling - like, comment, share clicks. */
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.VH> {
     private final List<PostItem> items;
+    private OnPostActionListener actionListener;
+
+    public interface OnPostActionListener {
+        void onLikeClick(int position);
+        void onCommentClick(int position);
+        void onShareClick(int position);
+    }
 
     public PostAdapter(List<PostItem> items) {
         this.items = items;
+    }
+
+    public void setOnPostActionListener(OnPostActionListener listener) {
+        this.actionListener = listener;
     }
 
     @NonNull
@@ -78,6 +90,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.VH> {
 
             tvLikeCount.setText(String.valueOf(item.getLikeCount()));
             tvCommentCount.setText(String.valueOf(item.getCommentCount()));
+
+            // Exp 4: button event handling
+            View ivLike = itemView.findViewById(R.id.ivLike);
+            View ivComment = itemView.findViewById(R.id.ivComment);
+            View ivShare = itemView.findViewById(R.id.ivShare);
+            PostAdapter adapter = (PostAdapter) getBindingAdapter();
+            if (adapter != null && adapter.actionListener != null) {
+                ivLike.setOnClickListener(v -> adapter.actionListener.onLikeClick(getBindingAdapterPosition()));
+                ivComment.setOnClickListener(v -> adapter.actionListener.onCommentClick(getBindingAdapterPosition()));
+                ivShare.setOnClickListener(v -> adapter.actionListener.onShareClick(getBindingAdapterPosition()));
+            }
         }
     }
 }

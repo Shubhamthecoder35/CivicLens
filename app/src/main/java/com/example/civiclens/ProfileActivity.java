@@ -20,9 +20,28 @@ public class ProfileActivity extends AppCompatActivity {
 
         BottomNavHelper.setup(this, binding.bottomNav, R.id.nav_profile);
         setupFeed();
+        setupSwipeRefresh();
+        setupTabClicks();
 
         binding.btnSettings.setOnClickListener(v -> Toast.makeText(this, "Settings (UI demo)", Toast.LENGTH_SHORT).show());
         binding.btnEditProfile.setOnClickListener(v -> Toast.makeText(this, "Edit Profile (UI demo)", Toast.LENGTH_SHORT).show());
+    }
+
+    private void setupSwipeRefresh() {
+        binding.swipeRefreshProfile.setOnRefreshListener(() -> {
+            binding.swipeRefreshProfile.setRefreshing(true);
+            binding.scroll.postDelayed(() -> {
+                binding.swipeRefreshProfile.setRefreshing(false);
+                android.widget.Toast.makeText(this, "Profile refreshed", android.widget.Toast.LENGTH_SHORT).show();
+            }, 600);
+        });
+    }
+
+    private void setupTabClicks() {
+        binding.tabPosts.setOnClickListener(v -> android.widget.Toast.makeText(this, "Posts tab", android.widget.Toast.LENGTH_SHORT).show());
+        binding.tabLikes.setOnClickListener(v -> android.widget.Toast.makeText(this, "Likes tab", android.widget.Toast.LENGTH_SHORT).show());
+        binding.tabComments.setOnClickListener(v -> android.widget.Toast.makeText(this, "Comments tab", android.widget.Toast.LENGTH_SHORT).show());
+        binding.tabShares.setOnClickListener(v -> android.widget.Toast.makeText(this, "Shares tab", android.widget.Toast.LENGTH_SHORT).show());
     }
 
     private void setupFeed() {

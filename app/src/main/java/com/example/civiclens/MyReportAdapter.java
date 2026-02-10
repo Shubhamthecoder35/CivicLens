@@ -13,11 +13,29 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+/** Exp 4: List with click (navigate) and swipe-to-delete via ItemTouchHelper. */
 public class MyReportAdapter extends RecyclerView.Adapter<MyReportAdapter.VH> {
-    private final List<MyReportItem> items;
+    private List<MyReportItem> items;
 
     public MyReportAdapter(List<MyReportItem> items) {
         this.items = items;
+    }
+
+    public void setItems(List<MyReportItem> newItems) {
+        this.items = newItems;
+        notifyDataSetChanged();
+    }
+
+    public void removeItem(int position) {
+        if (position >= 0 && position < items.size()) {
+            items.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
+    public MyReportItem getItem(int position) {
+        if (position >= 0 && position < items.size()) return items.get(position);
+        return null;
     }
 
     @NonNull

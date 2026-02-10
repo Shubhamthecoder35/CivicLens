@@ -28,9 +28,19 @@ public class NotificationsActivity extends AppCompatActivity {
         setupRecyclerView();
         setupTabs();
         setupClickListeners();
-        
-        // Show empty state initially
+        setupSwipeRefresh();
+
         showEmptyState(true);
+    }
+
+    private void setupSwipeRefresh() {
+        binding.swipeRefreshNotifications.setOnRefreshListener(() -> {
+            binding.swipeRefreshNotifications.setRefreshing(true);
+            binding.rvNotifications.postDelayed(() -> {
+                binding.swipeRefreshNotifications.setRefreshing(false);
+                Toast.makeText(this, "Notifications refreshed", Toast.LENGTH_SHORT).show();
+            }, 600);
+        });
     }
 
     private void setupToolbar() {
@@ -69,10 +79,9 @@ public class NotificationsActivity extends AppCompatActivity {
     }
 
     private void setupClickListeners() {
-        // Clear all notifications button
         binding.fabClearAll.setOnClickListener(v -> {
-            // TODO: Clear all notifications
-            Toast.makeText(this, "Clear all notifications", Toast.LENGTH_SHORT).show();
+            showEmptyState(true);
+            Toast.makeText(this, "All notifications cleared", Toast.LENGTH_SHORT).show();
         });
     }
 

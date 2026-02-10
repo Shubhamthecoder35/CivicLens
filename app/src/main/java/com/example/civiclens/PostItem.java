@@ -65,5 +65,10 @@ public class PostItem {
     public int getCommentCount() {
         return commentCount;
     }
+
+    /** Copy with updated like count (Exp 4: event-driven like button). */
+    public PostItem withLikeCount(int newLikeCount) {
+        return new PostItem(avatarRes, author, timeAgo, category, body, imageRes, newLikeCount, commentCount);
+    }
 }
 

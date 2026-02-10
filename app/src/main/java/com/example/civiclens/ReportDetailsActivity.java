@@ -4,14 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.civiclens.databinding.ActivityReportDetailsBinding;
 
 /**
  * ReportDetailsActivity - Report Details Display Screen
- * Part of Experiment 2: UI Design
- * Displays full details of a selected report
+ * Exp 4: Button handling (back, share, edit, delete, map card).
  */
 public class ReportDetailsActivity extends AppCompatActivity {
 
@@ -34,15 +34,29 @@ public class ReportDetailsActivity extends AppCompatActivity {
 
     private void setupClickListeners() {
         binding.btnBack.setOnClickListener(v -> finish());
-        binding.btnShare.setOnClickListener(v -> Toast.makeText(this, "Share (coming soon)", Toast.LENGTH_SHORT).show());
-        binding.btnEdit.setOnClickListener(v -> Toast.makeText(this, "Edit (coming soon)", Toast.LENGTH_SHORT).show());
-        binding.btnDelete.setOnClickListener(v -> Toast.makeText(this, "Delete (coming soon)", Toast.LENGTH_SHORT).show());
-        
-        // Map card click - launches MapActivity (Experiment 3: Intent navigation)
-        binding.mapCard.setOnClickListener(v -> {
-            Intent intent = new Intent(this, MapActivity.class);
-            startActivity(intent);
+
+        binding.btnShare.setOnClickListener(v -> {
+            String title = binding.tvTitle.getText() != null ? binding.tvTitle.getText().toString() : "";
+            String desc = binding.tvDescription.getText() != null ? binding.tvDescription.getText().toString() : "";
+            Intent share = new Intent(Intent.ACTION_SEND);
+            share.setType("text/plain");
+            share.putExtra(Intent.EXTRA_TEXT, title + "\n\n" + desc);
+            startActivity(Intent.createChooser(share, "Share report"));
         });
+
+        binding.btnEdit.setOnClickListener(v -> Toast.makeText(this, "Edit (coming soon)", Toast.LENGTH_SHORT).show());
+
+        binding.btnDelete.setOnClickListener(v -> new AlertDialog.Builder(this)
+                .setTitle("Delete report?")
+                .setMessage("This report will be removed. This cannot be undone.")
+                .setPositiveButton(android.R.string.ok, (d, w) -> {
+                    setResult(RESULT_OK);
+                    finish();
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .show());
+
+        binding.mapCard.setOnClickListener(v -> startActivity(new Intent(this, MapActivity.class)));
     }
 
     private void bindFromIntent() {
